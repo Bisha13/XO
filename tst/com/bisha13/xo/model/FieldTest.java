@@ -1,5 +1,7 @@
 package com.bisha13.xo.model;
 
+import com.bisha13.xo.model.exceptions.AlreadyOccupiedException;
+import com.bisha13.xo.model.exceptions.InvalidPointException;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -15,9 +17,20 @@ public class FieldTest {
 
         final Field testField = new Field(fieldSize);
         final Point point = new Point(0, 0);
-        testField.setFigure(point, Figure.O);
+        try {
+            testField.setFigure(point, Figure.O);
+        } catch (InvalidPointException e) {
+            e.printStackTrace();
+        } catch (AlreadyOccupiedException e) {
+            e.printStackTrace();
+        }
 
-        final Figure actualFigure = testField.getFigure(point);
+        Figure actualFigure = null;
+        try {
+            actualFigure = testField.getFigure(point);
+        } catch (InvalidPointException e) {
+            e.printStackTrace();
+        }
 
         assertEquals(expectedFigure, actualFigure);
 
