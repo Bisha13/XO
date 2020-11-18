@@ -1,26 +1,49 @@
 package com.bisha13.xo.model;
 
+import com.bisha13.xo.model.exceptions.AlreadyOccupiedException;
+import com.bisha13.xo.model.exceptions.InvalidPointException;
+
 public class Field {
 
-    private final int size;
+    private final int SIZE;
+
+    private final int MIN_SIZE = 0;
 
     private Figure[][] field;
 
     public Field(final int size) {
-        this.size = size;
+        this.SIZE = size;
         field = new Figure[size][size];
     }
 
-    public void setFigure(Point point, Figure figure) {
+    public void setFigure(Point point, Figure figure) throws InvalidPointException, AlreadyOccupiedException {
+        if (!checkPoint(point)) {
+            throw new InvalidPointException();
+        }
+        if (field[point.getX()][point.getY()] != null) {
+            throw new AlreadyOccupiedException();
+        }
+
         field[point.getX()][point.getY()] = figure;
     }
 
-    public Figure getFigure(Point point) {
+    public Figure getFigure(Point point) throws InvalidPointException {
+        if (!checkPoint(point)) {
+            throw new InvalidPointException();
+        }
         return field[point.getX()][point.getY()];
     }
 
     public int getSize() {
-        return size;
+        return SIZE;
+    }
+
+    private boolean checkPoint(Point point) {
+        return checkCoordinate(point.getX()) && checkCoordinate(point.getY());
+    }
+
+    private boolean checkCoordinate(int x) {
+        return ((x >= MIN_SIZE) && (x < SIZE));
     }
 
 }
