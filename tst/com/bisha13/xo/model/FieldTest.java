@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class FieldTest {
 
     @Test
-    public void setFigure() {
+    public void setFigure() throws Exception {
 
         final Figure inputFigure = Figure.O;
         final Figure expectedFigure = inputFigure;
@@ -17,20 +17,11 @@ public class FieldTest {
 
         final Field testField = new Field(fieldSize);
         final Point point = new Point(0, 0);
-        try {
-            testField.setFigure(point, Figure.O);
-        } catch (InvalidPointException e) {
-            e.printStackTrace();
-        } catch (AlreadyOccupiedException e) {
-            e.printStackTrace();
-        }
 
-        Figure actualFigure = null;
-        try {
-            actualFigure = testField.getFigure(point);
-        } catch (InvalidPointException e) {
-            e.printStackTrace();
-        }
+        testField.setFigure(point, Figure.O);
+
+
+        Figure actualFigure = testField.getFigure(point);
 
         assertEquals(expectedFigure, actualFigure);
 
