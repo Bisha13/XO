@@ -1,6 +1,5 @@
 package com.bisha13.xo.model;
 
-import com.bisha13.xo.model.exceptions.AlreadyOccupiedException;
 import com.bisha13.xo.model.exceptions.InvalidPointException;
 
 public class Field {
