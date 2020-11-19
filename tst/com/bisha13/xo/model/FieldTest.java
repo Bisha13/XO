@@ -28,23 +28,6 @@ public class FieldTest {
     }
 
     @Test
-    public void testSetFigureWhenAlreadyOccupied() throws Exception {
-
-        final Figure inputFigure = Figure.O;
-        final int fieldSize = 3;
-
-        final Field testField = new Field(fieldSize);
-        final Point point = new Point(0, 0);
-
-        testField.setFigure(point, inputFigure);
-
-        try {
-            testField.setFigure(point, inputFigure);
-            fail();
-        } catch (final AlreadyOccupiedException e) {}
-    }
-
-    @Test
     public void getSize() {
 
         final int inputSize = 3;
