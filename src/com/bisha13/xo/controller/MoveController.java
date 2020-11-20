@@ -6,13 +6,12 @@ import com.bisha13.xo.model.Point;
 import com.bisha13.xo.model.exceptions.AlreadyOccupiedException;
 import com.bisha13.xo.model.exceptions.InvalidPointException;
 
-
 public class MoveController {
 
     public void applyFigure(final Field field,
                             final Point point,
-                            final Figure figure) throws InvalidPointException,
-                                                      AlreadyOccupiedException {
+                            final Figure figure) throws AlreadyOccupiedException, InvalidPointException {
+
         if (field.getFigure(point) != null) {
             throw new AlreadyOccupiedException();
         }
