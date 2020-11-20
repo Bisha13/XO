@@ -11,93 +11,76 @@ import static org.junit.Assert.*;
 public class WinnerControllerTest {
 
     @Test
-    public void checkWinnerRow1() throws InvalidPointException {
+    public void checkWinnerRow() throws InvalidPointException {
         final int fieldSize = 3;
-        final Field field = new Field(fieldSize);
-        field.setFigure(new Point(0, 0), Figure.O);
-        field.setFigure(new Point(0, 1), Figure.O);
-        field.setFigure(new Point(0, 2), Figure.O);
-
         WinnerController winnerController = new WinnerController();
-        Figure expectedFigure = Figure.O;
-        Figure actualFigure = winnerController.getWinner(field);
 
-        assertEquals(expectedFigure, actualFigure);
+        for (int i = 0; i < fieldSize; i++) {
+            final Field field = new Field(fieldSize);
+            field.setFigure(new Point(0, 0), Figure.O);
+            field.setFigure(new Point(0, 1), Figure.O);
+            field.setFigure(new Point(0, 2), Figure.O);
+
+            Figure expectedFigure = Figure.O;
+            Figure actualFigure = winnerController.getWinner(field);
+
+            assertEquals(expectedFigure, actualFigure);
+        }
     }
 
     @Test
-    public void checkWinnerRow2() throws InvalidPointException {
+    public void checkWinnerRowWhenNoWinner() throws InvalidPointException {
         final int fieldSize = 3;
-        final Field field = new Field(fieldSize);
-        field.setFigure(new Point(1, 0), Figure.O);
-        field.setFigure(new Point(1, 1), Figure.O);
-        field.setFigure(new Point(1, 2), Figure.O);
-
         WinnerController winnerController = new WinnerController();
-        Figure expectedFigure = Figure.O;
-        Figure actualFigure = winnerController.getWinner(field);
+        for (int i = 0; i <fieldSize ; i++) {
 
-        assertEquals(expectedFigure, actualFigure);
+            final Field field = new Field(fieldSize);
+            field.setFigure(new Point(i, 0), Figure.O);
+            field.setFigure(new Point(i, 1), Figure.O);
+            field.setFigure(new Point(i, 2), Figure.X);
+
+            Figure expectedFigure = null;
+            Figure actualFigure = winnerController.getWinner(field);
+
+            assertEquals(expectedFigure, actualFigure);
+        }
+
     }
 
     @Test
-    public void checkWinnerRow3() throws InvalidPointException {
+    public void checkWinnerColumn() throws InvalidPointException {
         final int fieldSize = 3;
-        final Field field = new Field(fieldSize);
-        field.setFigure(new Point(2, 0), Figure.X);
-        field.setFigure(new Point(2, 1), Figure.X);
-        field.setFigure(new Point(2, 2), Figure.X);
-
         WinnerController winnerController = new WinnerController();
-        Figure expectedFigure = Figure.X;
-        Figure actualFigure = winnerController.getWinner(field);
+        for (int i = 0; i <fieldSize ; i++) {
 
-        assertEquals(expectedFigure, actualFigure);
+            final Field field = new Field(fieldSize);
+            field.setFigure(new Point(0, i), Figure.X);
+            field.setFigure(new Point(1, i), Figure.X);
+            field.setFigure(new Point(2, i), Figure.X);
+
+            Figure expectedFigure = Figure.X;
+            Figure actualFigure = winnerController.getWinner(field);
+
+            assertEquals(expectedFigure, actualFigure);
+        }
     }
 
     @Test
-    public void checkWinnerColumn1() throws InvalidPointException {
+    public void checkWinnerWhenNoWinnerColumn() throws InvalidPointException {
         final int fieldSize = 3;
-        final Field field = new Field(fieldSize);
-        field.setFigure(new Point(0, 0), Figure.X);
-        field.setFigure(new Point(1, 0), Figure.X);
-        field.setFigure(new Point(2, 0), Figure.X);
-
         WinnerController winnerController = new WinnerController();
-        Figure expectedFigure = Figure.X;
-        Figure actualFigure = winnerController.getWinner(field);
+        for (int i = 0; i <fieldSize ; i++) {
 
-        assertEquals(expectedFigure, actualFigure);
-    }
+            final Field field = new Field(fieldSize);
+            field.setFigure(new Point(0, i), Figure.O);
+            field.setFigure(new Point(1, i), Figure.O);
+            field.setFigure(new Point(2, i), Figure.X);
 
-    @Test
-    public void checkWinnerColumn2() throws InvalidPointException {
-        final int fieldSize = 3;
-        final Field field = new Field(fieldSize);
-        field.setFigure(new Point(0, 1), Figure.X);
-        field.setFigure(new Point(1, 1), Figure.X);
-        field.setFigure(new Point(2, 1), Figure.X);
+            Figure expectedFigure = null;
+            Figure actualFigure = winnerController.getWinner(field);
 
-        WinnerController winnerController = new WinnerController();
-        Figure expectedFigure = Figure.X;
-        Figure actualFigure = winnerController.getWinner(field);
-
-        assertEquals(expectedFigure, actualFigure);
-    }
-
-    @Test
-    public void checkWinnerColumn3() throws InvalidPointException {
-        final int fieldSize = 3;
-        final Field field = new Field(fieldSize);
-        field.setFigure(new Point(0, 2), Figure.X);
-        field.setFigure(new Point(1, 2), Figure.X);
-        field.setFigure(new Point(2, 2), Figure.X);
-
-        WinnerController winnerController = new WinnerController();
-        Figure expectedFigure = Figure.X;
-        Figure actualFigure = winnerController.getWinner(field);
-
-        assertEquals(expectedFigure, actualFigure);
+            assertEquals(expectedFigure, actualFigure);
+        }
     }
 
     @Test
@@ -116,6 +99,21 @@ public class WinnerControllerTest {
     }
 
     @Test
+    public void checkWinnerWhenNOWinnerDiagonal1() throws InvalidPointException {
+        final int fieldSize = 3;
+        final Field field = new Field(fieldSize);
+        field.setFigure(new Point(0, 0), Figure.O);
+        field.setFigure(new Point(1, 1), Figure.X);
+        field.setFigure(new Point(2, 2), Figure.O);
+
+        WinnerController winnerController = new WinnerController();
+        Figure expectedFigure = null;
+        Figure actualFigure = winnerController.getWinner(field);
+
+        assertEquals(expectedFigure, actualFigure);
+    }
+
+    @Test
     public void checkWinnerDiagonal2() throws InvalidPointException {
         final int fieldSize = 3;
         final Field field = new Field(fieldSize);
@@ -125,6 +123,21 @@ public class WinnerControllerTest {
 
         WinnerController winnerController = new WinnerController();
         Figure expectedFigure = Figure.O;
+        Figure actualFigure = winnerController.getWinner(field);
+
+        assertEquals(expectedFigure, actualFigure);
+    }
+
+    @Test
+    public void checkWinnerWhenNoWinnerDiagonal2() throws InvalidPointException {
+        final int fieldSize = 3;
+        final Field field = new Field(fieldSize);
+        field.setFigure(new Point(0, 2), Figure.X);
+        field.setFigure(new Point(1, 1), Figure.O);
+        field.setFigure(new Point(2, 0), Figure.O);
+
+        WinnerController winnerController = new WinnerController();
+        Figure expectedFigure = null;
         Figure actualFigure = winnerController.getWinner(field);
 
         assertEquals(expectedFigure, actualFigure);
