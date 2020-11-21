@@ -8,7 +8,7 @@ public class Game {
 
     private final String name;
 
-    public Game(Builder builder) {
+    private Game(Builder builder) {
         this.players = builder.getPlayers();
         this.field = builder.getField();
         this.name = builder.getName();
