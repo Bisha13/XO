@@ -53,4 +53,21 @@ public class CurrentMoveControllerTest {
 
     }
 
+    @Test
+    public void testFieldIsFull() throws InvalidPointException {
+        int fieldSize = 3;
+        Field field = new Field(fieldSize);
+        for (int i = 0; i < fieldSize; i++) {
+            field.setFigure(new Point(i, 0), Figure.X);
+            field.setFigure(new Point(i, 1), Figure.O);
+            field.setFigure(new Point(i, 2), Figure.O);
+        }
+
+        CurrentMoveController currentMoveController = new CurrentMoveController();
+        Figure actualFigure = currentMoveController.currentMove(field);
+
+        assertNull(actualFigure);
+
+    }
+
 }
