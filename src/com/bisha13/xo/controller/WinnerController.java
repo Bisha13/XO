@@ -7,20 +7,24 @@ import com.bisha13.xo.model.exceptions.InvalidPointException;
 
 public class WinnerController {
 
-    public Figure getWinner(Field field) throws InvalidPointException {
-        for (int i = 0; i < field.getSize(); i++) {
-            if (checkPoints(field, new Point(i, 0), p -> new Point(p.getX(), p.getY() + 1)))
-                return field.getFigure(new Point(i, 0));
-            if (checkPoints(field, new Point(0, i), p -> new Point(p.getX() + 1, p.getY())))
-                return field.getFigure(new Point(0, i));
-        }
-        if (checkPoints(field, new Point(0, 0),
-                p -> new Point(p.getX() + 1, p.getY() + 1)))
-            return field.getFigure(new Point(0, 0));
+    public Figure getWinner(Field field) {
+        try {
+            for (int i = 0; i < field.getSize(); i++) {
+                if (checkPoints(field, new Point(i, 0), p -> new Point(p.getX(), p.getY() + 1)))
+                    return field.getFigure(new Point(i, 0));
+                if (checkPoints(field, new Point(0, i), p -> new Point(p.getX() + 1, p.getY())))
+                    return field.getFigure(new Point(0, i));
+            }
+            if (checkPoints(field, new Point(0, 0),
+                    p -> new Point(p.getX() + 1, p.getY() + 1)))
+                return field.getFigure(new Point(0, 0));
 
-        if (checkPoints(field, new Point(0, field.getSize() - 1),
-                p -> new Point(p.getX() + 1, p.getY() - 1)))
-            return field.getFigure(new Point(0, field.getSize() - 1));
+            if (checkPoints(field, new Point(0, field.getSize() - 1),
+                    p -> new Point(p.getX() + 1, p.getY() - 1)))
+                return field.getFigure(new Point(0, field.getSize() - 1));
+        } catch (InvalidPointException e) {
+            throw new RuntimeException(e);
+        }
 
         return null;
     }
