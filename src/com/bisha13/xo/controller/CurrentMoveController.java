@@ -12,6 +12,10 @@ public class CurrentMoveController {
         for (int x = 0; x < field.getSize(); x++) {
             count += countFigureInRow(field, x);
         }
+
+        if (count == field.getSize() * field.getSize())
+            return null;
+
         return count % 2 == 0 ? Figure.X : Figure.O;
     }
 
